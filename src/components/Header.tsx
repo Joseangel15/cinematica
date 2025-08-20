@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Header() {
   return (
     <header>
@@ -35,7 +37,7 @@ export default function Header() {
                     <a>Movies</a>
                   </li>
                   <li>
-                    <a>TV/Streaming</a>
+                    <a>TV / Streaming</a>
                   </li>
                 </ul>
               </li>
@@ -44,23 +46,22 @@ export default function Header() {
               </li>
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl">CINEMATICA</a>
+          <Link className="btn btn-ghost text-xl" href="/">RED HOT FLIX</Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
             <li>
-              <a>Movies</a>
+              <Link href="/movies">Movies</Link>
             </li>
             <li>
-              <a>TV Shows</a>
+              <Link href="/tv-streaming">TV / Streaming</Link>
             </li>
             <li>
-              <a>Coming Soon</a>
+              <a>News</a>
             </li>
           </ul>
         </div>
         <div className="navbar-end">
-          <a className="btn">Button</a>
         </div>
       </div>
     </header>

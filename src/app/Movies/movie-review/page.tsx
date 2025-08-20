@@ -7,8 +7,6 @@ import Image from "next/image";
 export default async function MovieReviewPage() {
   const posts: Entry[] = await getEntries("blogPost");
 
-  console.log(posts);
-
   return (
     <div>
       <h1 className="text-3xl font-bold text-center">Movie Review</h1>
@@ -30,9 +28,7 @@ export default async function MovieReviewPage() {
               {post.fields.postTitle?.toString()}
             </h2>
             {post.fields.postContent && 
-              typeof post.fields.postContent === "object" &&
-              documentToReactComponents(post.fields.postContent as unknown as Document)}
-              documentToReactComponents(post.fields.postContent as Document)
+              typeof post.fields.postContent === "object" && documentToReactComponents(post.fields.postContent as unknown as Document)}
           </li>
         ))}
       </ul>

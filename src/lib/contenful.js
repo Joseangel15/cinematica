@@ -12,3 +12,8 @@ export async function getEntries(contentType) {
   });
   return entries.items;
 }
+
+export async function getEntryById(id) {
+  const entry = await contentfulClient.getEntry(id);
+  return entry;
+}
