@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export default function MovieHomeBanner() {
+export default function TvHomeBanner() {
     const movieCards = [
         {
             title: "Inception",
@@ -20,7 +20,7 @@ export default function MovieHomeBanner() {
     return (
         <section className="py-8 px-8">
             <div>
-                <h2 className="text-2xl font-bold text-center p-8"><Link href="/movies">Featured Movies</Link></h2>
+                <h2 className="text-2xl font-bold text-center p-8"><Link href="/tv-streaming">Featured Shows</Link></h2>
                 <div className="carousel w-full justify-center">
                     {
                         movieCards.map((movie, index) => (
