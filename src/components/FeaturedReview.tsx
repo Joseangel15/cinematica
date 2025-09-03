@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Entry } from "contentful";
 import { getEntryById } from "../lib/contenful";
 
@@ -30,13 +31,13 @@ export default async function FeaturedReview() {
 
     return (
       <section className={`w-2/3 flex items-end p-5 bg-cover bg-center rounded-lg`} style={backgroundStyle}>
-        <div className="rounded-lg flex w-full">
+        <Link href={`/movies/movie-review/${firstPost.sys.id}`} className="rounded-lg flex w-full">
           <div className="mr-5">
             <Image
               src={`https:${movieImageUrl ? movieImageUrl : ""}`}
               alt={String(movieTitle)}
-              width={200}
-              height={200}
+              width={150}
+              height={150}
             />
           </div>
           <div>
@@ -54,7 +55,7 @@ export default async function FeaturedReview() {
               <p>{String(authorName)}</p>
             </div>
           </div>
-        </div>
+        </Link>
       </section>
     );
   } else {

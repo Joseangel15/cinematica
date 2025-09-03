@@ -17,13 +17,13 @@ export default function NewsBanner() {
     ];
 
     return (
-        <section className="py-8 px-8 w-1/3 bg-neutral rounded-2xl">
+        <section className="p-4 w-1/3 bg-neutral rounded-2xl">
             <div>
-                <h2 className="text-2xl font-bold text-center p-8">Latest News</h2>
+                <h2 className="text-2xl font-bold text-center p-4">Latest News</h2>
                 <div className="w-full justify-center">
                     {
                         newsArticles.map((article, index) => (
-                            <div key={index} className="flex items-center p-4">
+                            <div key={index} className="flex items-center pb-3">
                                 <Image src={article.imageUrl} alt={article.title} width={100} height={100} />
                                 <h3 className="text-lg font-semibold p-4">{article.title}</h3>
                             </div>

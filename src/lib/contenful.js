@@ -17,3 +17,8 @@ export async function getEntryById(id) {
   const entry = await contentfulClient.getEntry(id);
   return entry;
 }
+
+export async function getEntryBlogPosts() {
+  const blogPosts = await getEntries("blogPost");
+  return blogPosts;
+}
