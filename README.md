@@ -2,7 +2,9 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
-First, run the development server:
+Movie and TV data comes from [The Movie Database (TMDB)](https://www.themoviedb.org/). Copy `.env.example` to `.env.local` and set `TMDB_API_KEY` with a TMDB v3 API key from https://www.themoviedb.org/settings/api.
+
+Then, run the development server:
 
 ```bash
 npm run dev

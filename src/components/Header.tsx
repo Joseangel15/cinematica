@@ -51,7 +51,7 @@ export default function Header() {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
             <li>
-              <Link href="/movies">Movies</Link>
+              <Link href="/Movies">Movies</Link>
             </li>
             <li>
               <Link href="/tv-streaming">TV / Streaming</Link>

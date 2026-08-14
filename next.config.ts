@@ -6,15 +6,9 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "theposterdb.com",
+        hostname: "image.tmdb.org",
         port: "",
-        pathname: "/**",
-      },
-      {
-        protocol: 'https',
-        hostname: 'images.ctfassets.net',
-        port: '',
-        pathname: `/**`, // Replace {space_id} with your actual Contentful space ID
+        pathname: "/t/p/**",
       },
     ]
   }

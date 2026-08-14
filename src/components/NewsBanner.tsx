@@ -1,36 +1,38 @@
 import Image from "next/image";
+import Link from "next/link";
+import { getImageUrl, getNowPlayingMovies } from "../lib/tmdb";
 
-export default function NewsBanner() {
-    const newsArticles = [
-        {
-            title: "Breaking: New Movie Released",
-            imageUrl: "https://theposterdb.com/api/assets/52633/view"
-        },
-        {
-            title: "Celebrity Interview: Behind the Scenes",
-            imageUrl: "https://theposterdb.com/api/assets/52634/view"
-        },
-        {
-            title: "Box Office: This Week's Top Movies",
-            imageUrl: "https://theposterdb.com/api/assets/52635/view"
-        }
-    ];
+export default async function NewsBanner() {
+  const nowPlaying = (await getNowPlayingMovies()).slice(0, 5);
 
-    return (
-        <section className="p-4 w-1/3 bg-neutral rounded-2xl">
-            <div>
-                <h2 className="text-2xl font-bold text-center p-4">Latest News</h2>
-                <div className="w-full justify-center">
-                    {
-                        newsArticles.map((article, index) => (
-                            <div key={index} className="flex items-center pb-3">
-                                <Image src={article.imageUrl} alt={article.title} width={100} height={100} />
-                                <h3 className="text-lg font-semibold p-4">{article.title}</h3>
-                            </div>
-                        ))
-                    }
-                </div>
-            </div>
-        </section>
-    );
+  return (
+    <section className="p-4 w-1/3 bg-neutral rounded-2xl">
+      <div>
+        <h2 className="text-2xl font-bold text-center p-4">Now In Theaters</h2>
+        <div className="w-full justify-center">
+          {nowPlaying.map((movie) => {
+            const posterUrl = getImageUrl(movie.poster_path, "w200");
+
+            return (
+              <Link
+                key={movie.id}
+                href={`/Movies/movie-review/${movie.id}`}
+                className="flex items-center pb-3"
+              >
+                {posterUrl && (
+                  <Image
+                    src={posterUrl}
+                    alt={movie.title}
+                    width={100}
+                    height={150}
+                  />
+                )}
+                <h3 className="text-lg font-semibold p-4">{movie.title}</h3>
+              </Link>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
 }
