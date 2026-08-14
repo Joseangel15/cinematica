@@ -21,7 +21,7 @@ export default async function Movies() {
           return (
             <Link
               key={movie.id}
-              href={`/Movies/movie-review/${movie.id}`}
+              href={`/movies/movie-review/${movie.id}`}
               className="flex gap-4 border-b border-gray-200 py-4"
             >
               {posterUrl && (

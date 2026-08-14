@@ -34,10 +34,10 @@ export default function Header() {
                 <a>Parent</a>
                 <ul className="p-2">
                   <li>
-                    <a>Movies</a>
+                    <Link href="/movies">Movies</Link>
                   </li>
                   <li>
-                    <a>TV / Streaming</a>
+                    <Link href="/tv">TV Shows</Link>
                   </li>
                 </ul>
               </li>
@@ -51,13 +51,13 @@ export default function Header() {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
             <li>
-              <Link href="/Movies">Movies</Link>
+              <Link href="/movies">Movies</Link>
             </li>
             <li>
-              <Link href="/tv-streaming">TV / Streaming</Link>
+              <Link href="/tv">TV Shows</Link>
             </li>
             <li>
-              <a>News</a>
+              <Link href="/news">News</Link>
             </li>
           </ul>
         </div>

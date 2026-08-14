@@ -1,6 +1,7 @@
 import Image from "next/image";
-import { getImageUrl, getMovieById } from "../../../../lib/tmdb";
+import { getImageUrl, getMovieById, getMovieCast } from "../../../../lib/tmdb";
 import Ratings from "../../../../components/Ratings";
+import Carousel from "../../../../components/Carousel";
 
 export const dynamic = "force-dynamic";
 
@@ -12,6 +13,7 @@ export default async function MovieReviewPage({
   const { id } = await params;
   const movie = await getMovieById(id);
   const backdropUrl = getImageUrl(movie.backdrop_path, "w780");
+  const cast = await getMovieCast(id);
 
   return (
     <div className="max-w-4xl mx-auto p-5">
@@ -45,10 +47,34 @@ export default async function MovieReviewPage({
           width={780}
           height={439}
           className="rounded-lg mt-5 mb-5 w-full"
+          priority
         />
       )}
       <div className="post-content">
         <p>{movie.overview}</p>
+      </div>
+      <div className="mt-5">
+        <h2 className="text-2xl font-bold text-left mb-2">Cast</h2>
+        <Carousel>
+          {cast.map((castMember) => {
+            const profileUrl = getImageUrl(castMember.profile_path, "w185");
+            return (
+              <div key={castMember.id} className="flex flex-col items-center p-2 min-w-[150px]">
+                {profileUrl && (
+                  <Image
+                    src={profileUrl}
+                    alt={castMember.name}
+                    width={185}
+                    height={278}
+                    className="rounded-lg"
+                  />
+                )}
+                <p className="mt-2 font-semibold text-center">{castMember.name}</p>
+                <p className="text-sm text-gray-500 text-center">{castMember.character}</p>
+              </div>
+            );
+          })}
+        </Carousel>
       </div>
     </div>
   );

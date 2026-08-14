@@ -5,12 +5,12 @@ import Ratings from "../../components/Ratings";
 
 export const dynamic = "force-dynamic";
 
-export default async function TvStreaming() {
+export default async function Tv() {
   const shows = await getPopularTvShows();
 
   return (
     <section>
-      <h1 className="text-3xl font-bold text-center">TV Streaming</h1>
+      <h1 className="text-3xl font-bold text-center">TV Shows</h1>
       <p className="mt-4 text-center">
         Discover the best TV shows and streaming options available.
       </p>
@@ -21,7 +21,7 @@ export default async function TvStreaming() {
           return (
             <Link
               key={show.id}
-              href={`/tv-streaming/tv-reviews/${show.id}`}
+              href={`/tv/tv-review/${show.id}`}
               className="flex gap-4 border-b border-gray-200 py-4"
             >
               {posterUrl && (

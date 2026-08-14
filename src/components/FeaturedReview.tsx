@@ -24,7 +24,7 @@ export default async function FeaturedReview() {
       style={backgroundStyle}
     >
       <Link
-        href={`/Movies/movie-review/${featuredMovie.id}`}
+        href={`/movies/movie-review/${featuredMovie.id}`}
         className="rounded-lg flex w-full"
       >
         {posterUrl && (

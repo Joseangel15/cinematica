@@ -35,6 +35,13 @@ export type TmdbTvShowDetails = TmdbTvShow & {
   genres: { id: number; name: string }[];
 };
 
+export type TmdbCastMember = {
+  id: number;
+  name: string;
+  character: string;
+  profile_path: string | null;
+};
+
 type TmdbPagedResponse<T> = {
   page: number;
   results: T[];
@@ -74,7 +81,7 @@ async function tmdbFetch<T>(
 
 export function getImageUrl(
   path: string | null | undefined,
-  size: "w200" | "w300" | "w500" | "w780" | "original" = "w500"
+  size: "w185" | "w200" | "w300" | "w500" | "w780" | "original" = "w500"
 ): string | null {
   if (!path) return null;
   return `${TMDB_IMAGE_BASE_URL}/${size}${path}`;
@@ -117,4 +124,14 @@ export async function getTvShowById(
   id: string | number
 ): Promise<TmdbTvShowDetails> {
   return tmdbFetch<TmdbTvShowDetails>(`/tv/${id}`);
+}
+
+export async function getMovieCast(id: string | number): Promise<TmdbCastMember[]> {
+  const data = await tmdbFetch<{ cast: TmdbCastMember[] }>(`/movie/${id}/credits`);
+  return data.cast;
+}
+
+export async function getTvShowCast(id: string | number): Promise<TmdbCastMember[]> {
+  const data = await tmdbFetch<{ cast: TmdbCastMember[] }>(`/tv/${id}/credits`);
+  return data.cast;
 }

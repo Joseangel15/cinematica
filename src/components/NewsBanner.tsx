@@ -16,7 +16,7 @@ export default async function NewsBanner() {
             return (
               <Link
                 key={movie.id}
-                href={`/Movies/movie-review/${movie.id}`}
+                href={`/movies/movie-review/${movie.id}`}
                 className="flex items-center pb-3"
               >
                 {posterUrl && (
