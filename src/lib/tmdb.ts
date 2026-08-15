@@ -27,12 +27,14 @@ export type TmdbMovieDetails = TmdbMovie & {
   tagline: string | null;
   runtime: number | null;
   genres: { id: number; name: string }[];
+  certification: string | null;
 };
 
 export type TmdbTvShowDetails = TmdbTvShow & {
   tagline: string | null;
   number_of_seasons: number | null;
   genres: { id: number; name: string }[];
+  certification: string | null;
 };
 
 export type TmdbCastMember = {
@@ -107,7 +109,14 @@ export async function getNowPlayingMovies(): Promise<TmdbMovie[]> {
 }
 
 export async function getMovieById(id: string | number): Promise<TmdbMovieDetails> {
-  return tmdbFetch<TmdbMovieDetails>(`/movie/${id}`);
+  const movie = await tmdbFetch<TmdbMovieDetails>(`/movie/${id}`);
+  const releaseData = await tmdbFetch<{ results: { iso_3166_1: string; release_dates: { certification: string }[] }[] }>(`/movie/${id}/release_dates`);
+  
+  // Find US release dates
+  const usRelease = releaseData.results.find(r => r.iso_3166_1 === "US");
+  const certification = usRelease?.release_dates[0]?.certification || null;
+  
+  return { ...movie, certification };
 }
 
 export async function getPopularTvShows(): Promise<TmdbTvShow[]> {
@@ -123,7 +132,14 @@ export async function getTopRatedTvShows(): Promise<TmdbTvShow[]> {
 export async function getTvShowById(
   id: string | number
 ): Promise<TmdbTvShowDetails> {
-  return tmdbFetch<TmdbTvShowDetails>(`/tv/${id}`);
+  const tvShow = await tmdbFetch<TmdbTvShowDetails>(`/tv/${id}`);
+  const contentRatings = await tmdbFetch<{ results: { iso_3166_1: string; rating: string }[] }>(`/tv/${id}/content_ratings`);
+  
+  // Find US content rating
+  const usRating = contentRatings.results.find(r => r.iso_3166_1 === "US");
+  const certification = usRating?.rating || null;
+  
+  return { ...tvShow, certification };
 }
 
 export async function getMovieCast(id: string | number): Promise<TmdbCastMember[]> {

@@ -56,7 +56,7 @@ export default async function TvReviewPage({
       </div>
       <div className="mt-5">
         <h2 className="text-2xl font-bold text-left mb-2">Cast</h2>
-        <Carousel>
+        <Carousel showArrows={cast && cast.length > 5}>
           {cast && cast.length > 0 ? (
             cast.map((castMember) => {
               const profileUrl = getImageUrl(castMember.profile_path, "w185");
