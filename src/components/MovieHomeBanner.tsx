@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { getImageUrl, getPopularMovies } from "../lib/tmdb";
-import Carousel from "./Carousel";
 
 export default async function MovieHomeBanner() {
   const movies = (await getPopularMovies()).slice(0, 6);
@@ -12,7 +11,7 @@ export default async function MovieHomeBanner() {
         <h2 className="text-2xl font-bold text-center p-8">
           <Link href="/movies">Featured Movies</Link>
         </h2>
-        <Carousel>
+        <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
           {movies.map((movie) => {
             const posterUrl = getImageUrl(movie.poster_path, "w300");
 
@@ -20,7 +19,7 @@ export default async function MovieHomeBanner() {
               <Link
                 key={movie.id}
                 href={`/movies/movie-review/${movie.id}`}
-                className="flex flex-col items-center justify-center p-4 min-w-[200px]"
+                className="flex flex-col items-center justify-center p-4 min-w-[200px] flex-shrink-0"
               >
                 {posterUrl && (
                   <Image
@@ -34,7 +33,7 @@ export default async function MovieHomeBanner() {
               </Link>
             );
           })}
-        </Carousel>
+        </div>
       </div>
     </section>
   );

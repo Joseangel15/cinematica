@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { getImageUrl, getTvShowById, getTvShowCast } from "../../../../lib/tmdb";
 import Ratings from "../../../../components/Ratings";
-import Carousel from "../../../../components/Carousel";
+import Cast from "../../../../components/Cast";
 
 export const dynamic = "force-dynamic";
 
@@ -55,31 +55,7 @@ export default async function TvReviewPage({
         <p>{show.overview}</p>
       </div>
       <div className="mt-5">
-        <h2 className="text-2xl font-bold text-left mb-2">Cast</h2>
-        <Carousel showArrows={cast && cast.length > 5}>
-          {cast && cast.length > 0 ? (
-            cast.map((castMember) => {
-              const profileUrl = getImageUrl(castMember.profile_path, "w185");
-              return (
-                <div key={castMember.id} className="flex flex-col items-center p-2 min-w-[150px]">
-                  {profileUrl && (
-                    <Image
-                      src={profileUrl}
-                      alt={castMember.name}
-                      width={185}
-                      height={278}
-                      className="rounded-lg"
-                    />
-                  )}
-                  <p className="mt-2 font-semibold text-center">{castMember.name}</p>
-                  <p className="text-sm text-gray-500 text-center">{castMember.character}</p>
-                </div>
-              );
-            })
-          ) : (
-            <p className="text-gray-500">No cast information available</p>
-          )}
-        </Carousel>
+        <Cast cast={cast || []} />
       </div>
     </div>
   );
